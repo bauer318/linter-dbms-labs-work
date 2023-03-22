@@ -15,11 +15,12 @@ public class LinterApplication {
     public static void main(String[] args) {
         SpringApplication.run(LinterApplication.class, args);
     }
+
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.relx.jdbc.LinterDriver");
-        dataSource.setUrl("jdbc:linter:linapid:localhost:1070:DEMO;autoCommit=true");
+        dataSource.setUrl("jdbc:linter:linapid:localhost:1070:local;autoCommit=true");
         dataSource.setUsername("SYSTEM");
         dataSource.setPassword("MANAGER");
         return dataSource;

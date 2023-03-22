@@ -21,26 +21,26 @@ public class DormRepositoryImpl implements DormRepository{
 
     @Override
     public Optional<Dorm> findById(long id) {
-        Dorm dorm = jdbcTemplate.queryForObject("SELECT dorm_number,dorm_address, telephone FROM dorms WHERE dorm_number =?", this::mapRowToDorm,id);
+        Dorm dorm = jdbcTemplate.queryForObject("SELECT dorm_number,dorm_address, dorm_phone FROM dorms WHERE dorm_number =?", this::mapRowToDorm,id);
         return Optional.ofNullable(dorm);
     }
 
     @Override
     public void save(Dorm dorm) {
-        jdbcTemplate.update("INSERT INTO dorms(dorm_number,dorm_address, telephone) VALUES (?,?,?)",
+        jdbcTemplate.update("INSERT INTO dorms(dorm_number,dorm_address, dorm_phone) VALUES (?,?,?)",
                 dorm.getNumber(),dorm.getAddress(), dorm.getTelephone());
     }
 
     @Override
     public List<Dorm> findAll() {
-        return jdbcTemplate.query("SELECT dorm_number, dorm_address, telephone FROM dorms",this::mapRowToDorm);
+        return jdbcTemplate.query("SELECT dorm_number, dorm_address, dorm_phone FROM dorms",this::mapRowToDorm);
     }
 
     private Dorm mapRowToDorm(ResultSet resultSet, int rowNumber) throws SQLException{
         return new Dorm(
                 resultSet.getLong("dorm_number"),
                 resultSet.getString("dorm_address"),
-                resultSet.getString("telephone")
+                resultSet.getString("dorm_phone")
         );
     }
 }
